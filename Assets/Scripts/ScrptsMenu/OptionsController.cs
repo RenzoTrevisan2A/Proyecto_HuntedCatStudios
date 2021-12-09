@@ -7,7 +7,7 @@ using UnityEngine;
 public class OptionsController : MonoBehaviour
 {
     public GameObject canvasOptions;
-    public GameObject pauseMenu;
+    GameObject pauseMenu;
 
     private void Update()
     {

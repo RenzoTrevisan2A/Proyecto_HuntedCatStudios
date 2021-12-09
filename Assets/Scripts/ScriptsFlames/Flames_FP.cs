@@ -41,6 +41,10 @@ public class Flames_FP : MonoBehaviour
         {
             StartCoroutine(StartFlames());
         }
+        else if (elementos2.poderDeFuegoActivo == false)
+        {
+            flames.Stop();
+        }
     }
 
     private IEnumerator StartFlames()
