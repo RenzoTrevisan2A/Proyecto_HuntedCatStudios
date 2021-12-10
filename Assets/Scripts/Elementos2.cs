@@ -19,6 +19,7 @@ public class Elementos2 : MonoBehaviour
     [SerializeField] GameObject PoderSecundario;
 
     [SerializeField] public SlotHandler[] slots;
+    [SerializeField] public Sprite[] spritesUI;
 
     public bool poderDeTierraActivo = false;
     public bool poderDeFuegoActivo = false;
@@ -38,7 +39,7 @@ public class Elementos2 : MonoBehaviour
         Ninguno = -1,
     };
      public Elementos elementoPrincipal = Elementos.Ninguno;
-     Elementos elementoSecundario = Elementos.Ninguno;
+     public Elementos elementoSecundario = Elementos.Ninguno;
 
     // Cache of the renderers
     Renderer p1;
@@ -78,6 +79,12 @@ public class Elementos2 : MonoBehaviour
                 CambioElem = false;
             }
         }
+
+        if(elementoPrincipal == Elementos.Fuego || elementoPrincipal == Elementos.Agua)
+        {
+            AsignSpriteElementUI();
+        }
+
 
         if (elementoPrincipal == Elementos.Tierra)
         {
@@ -161,5 +168,31 @@ public class Elementos2 : MonoBehaviour
 
         slots[1].GetComponent<Image>().sprite = slots[0].GetComponent<Image>().sprite;
         slots[0].GetComponent<Image>().sprite = auxiliar;
+    }
+
+    void AsignSpriteElementUI()
+    {
+        if(elementoSecundario != Elementos.Ninguno)
+        {
+            if (elementoSecundario == Elementos.Fuego)
+            {
+                slots[1].GetComponent<Image>().sprite = spritesUI[0];
+            }
+            else if (elementoSecundario == Elementos.Agua)
+            {
+                slots[1].GetComponent<Image>().sprite = spritesUI[1];
+            }
+        }
+        else if (elementoPrincipal != Elementos.Ninguno)
+        {
+            if (elementoPrincipal == Elementos.Fuego)
+            {
+                slots[0].GetComponent<Image>().sprite = spritesUI[0];
+            }
+            else if (elementoPrincipal == Elementos.Agua)
+            {
+                slots[0].GetComponent<Image>().sprite = spritesUI[1];
+            }
+        }
     }
 }

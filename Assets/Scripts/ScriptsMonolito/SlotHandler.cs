@@ -12,13 +12,6 @@ public class SlotHandler : MonoBehaviour,  IDropHandler
     [SerializeField] Elementos2.Orderlyness orderlyness;
     [SerializeField] SlotHandler fallbackSlot;
 
-    Color actualSlotColor;
-
-    private void Start()
-    {
-        
-    }
-
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag != null)

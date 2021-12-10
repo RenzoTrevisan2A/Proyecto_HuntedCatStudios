@@ -29,6 +29,7 @@ public class PickUpObjects : MonoBehaviour
 
     Elementos2 elementos2;
     public GameObject canvasMonolito;
+    public SimpleMonolito monolitosSiple;
     
 
     private void Awake()
@@ -127,6 +128,11 @@ public class PickUpObjects : MonoBehaviour
                 SetMonolito();
                 LockScripts();
             }
+        }
+
+        if (objectToPickUp != null && selectButtonPressed)
+        {
+            SetSimpleMonolito();
         }
 
     }
@@ -230,6 +236,39 @@ public class PickUpObjects : MonoBehaviour
             canvasMonolito.SetActive(false);
             selectButtonPressed = false;
         }
+    }
+
+    private void SetSimpleMonolito()
+    {
+        if (objectToPickUp.CompareTag("Fuego") || objectToPickUp.CompareTag("Agua"))
+        {
+            if (elementos2.elementoPrincipal == Elementos2.Elementos.Ninguno)
+            {
+                if (objectToPickUp.CompareTag("Fuego"))
+                {
+                    elementos2.elementoPrincipal = Elementos2.Elementos.Fuego;
+                }
+                else if (objectToPickUp.CompareTag("Agua"))
+                {
+                    elementos2.elementoPrincipal = Elementos2.Elementos.Agua;
+                }
+                selectButtonPressed = false;
+            }
+            else
+            {
+                elementos2.elementoSecundario = elementos2.elementoPrincipal;
+                if (objectToPickUp.CompareTag("Fuego"))
+                {
+                    elementos2.elementoPrincipal = Elementos2.Elementos.Fuego;
+                }
+                else if (objectToPickUp.CompareTag("Agua"))
+                {
+                    elementos2.elementoPrincipal = Elementos2.Elementos.Agua;
+                }
+                selectButtonPressed = false;
+            }
+        }
+        
     }
 
     private void LockScripts()

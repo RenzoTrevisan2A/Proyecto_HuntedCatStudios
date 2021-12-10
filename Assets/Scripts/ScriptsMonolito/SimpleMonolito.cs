@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class SimpleMonolito : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum SimpleMonolitoType
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        Fuego,
+        Agua,
+    };
 }
