@@ -6,16 +6,20 @@ using UnityEngine;
 
 public class TitleScene : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
+    public GameObject transitionPanel;
 
     void Update()
     {
         if (Keyboard.current.anyKey.isPressed)
         {
-            SceneManager.LoadScene("MainMenu_Scene");
+            StartCoroutine(Trasitioning("MainMenu_Scene"));
         }
+    }
+
+    public IEnumerator Trasitioning(string scene)
+    {
+        transitionPanel.GetComponent<Animator>().SetTrigger("Exit");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(scene);
     }
 }
