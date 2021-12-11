@@ -135,6 +135,14 @@ public class Character : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("AHHHHHHHHG");
+        }
+    }
+
     //Las siguientes funciones son las que reciben la info de los inputs.
     private void OnMove(InputValue input)
     {

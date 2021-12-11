@@ -19,6 +19,7 @@ TagManager:
   - PowerFlames
   - Options
   - PauseMenu
+  - Enemy
   layers:
   - Default
   - TransparentFX
