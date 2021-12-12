@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
@@ -36,10 +37,21 @@ public class Character : MonoBehaviour
     private Vector2 moveVector;
     public Vector3 playerVelocity;
 
+    Collider col;
+
     //referencias
     CharacterController controller;
     PickUpObjects picking;
     Animator characterAnimatorController;
+
+    //referencias Scripts
+    GodMode godMode;
+
+    Character character;
+    PickUpObjects pickUpObjects;
+    Elementos2 elementos2;
+    Flames_FP flames_FP;
+
 
     bool selectButtonPressed = false;
 
@@ -49,6 +61,10 @@ public class Character : MonoBehaviour
         controller = GetComponent<CharacterController>();
         picking = GetComponent<PickUpObjects>();
         characterAnimatorController = GetComponent<Animator>();
+        //godMode.enabled = false;
+
+        col = GetComponent<Collider>();
+        col.enabled = false;
     }
         
     private void FixedUpdate()
@@ -94,6 +110,7 @@ public class Character : MonoBehaviour
         {
             actualSpeed = 0f;
         }
+        
 
         //mecanica dede Salto.
         if (jump && groundedPlayer)
@@ -115,6 +132,16 @@ public class Character : MonoBehaviour
         if (dash)
         {
             StartCoroutine(DashCoroutine());
+        }
+
+        if (Keyboard.current.f12Key.wasPressedThisFrame)
+        {
+            godMode.enabled = true;
+
+            character.enabled = false;
+            pickUpObjects.enabled = false;
+            elementos2.enabled = false;
+            flames_FP.enabled = false;
         }
     }
 
@@ -140,6 +167,15 @@ public class Character : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("AHHHHHHHHG");
+        }
+
+        if (other.CompareTag("Victory"))
+        {
+            SceneManager.LoadScene("Victory_Scene");
+        }
+        else if (other.CompareTag("Loosing"))
+        {
+            SceneManager.LoadScene("Losing_Scene");
         }
     }
 

@@ -29,8 +29,8 @@ public class PickUpObjects : MonoBehaviour
 
     Elementos2 elementos2;
     public GameObject canvasMonolito;
-    public SimpleMonolito monolitosSiple;
-    
+    //public SimpleMonolito monolitosSiple;
+
 
     private void Awake()
     {
@@ -61,7 +61,7 @@ public class PickUpObjects : MonoBehaviour
         else if (monolitoActivo)
         {
             Cursor.SetCursor(cursorPointer, Vector2.zero, CursorMode.Auto);
-            Cursor.visible = true;  
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
 
@@ -95,12 +95,12 @@ public class PickUpObjects : MonoBehaviour
 
             if (objectToPickUp != null && objectToPickUp.isPickable == true && pickedObject == null)
             {
-                if(objectToPickUp.CompareTag("PickableObject") || objectToPickUp.CompareTag("DraggingObject"))
+                if (objectToPickUp.CompareTag("PickableObject") || objectToPickUp.CompareTag("DraggingObject"))
                 {
                     PickingUpObjects();
                 }
             }
-            
+
             if (pickedObject != null && pickedObject.CompareTag("PickableObject"))
             {
                 ThrowingObjects();
@@ -150,6 +150,8 @@ public class PickUpObjects : MonoBehaviour
             pickedObject.transform.position = interactionZone.position;
             pickedObject.GetComponent<Rigidbody>().useGravity = false;
             pickedObject.GetComponent<Rigidbody>().isKinematic = true;
+            AudioManager.PlayerSound("pickingrock");
+
 
             powerActionPressed = false;
         }
@@ -193,13 +195,16 @@ public class PickUpObjects : MonoBehaviour
             pickedObject = null;
             interactionZoneDrag.GetComponent<Collider>().enabled = true;
             powerActionPressed = false;
+
+            AudioManager.PlayerSound("rockhit");
             iHaveARock = false;
         }
     }
 
     private void LettingDownObjects()
     {
-        if (pickedObject != null) {
+        if (pickedObject != null)
+        {
             if (powerActionPressed || elementos2.poderDeTierraActivo != true)
             {
                 Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
@@ -213,13 +218,15 @@ public class PickUpObjects : MonoBehaviour
                 pickedObject = null;
                 interactionZoneDrag.GetComponent<Collider>().enabled = true;
                 powerActionPressed = false;
+                AudioManager.PlayerSound("rockhit");
+
                 ImDraggingSomething = false;
                 iHaveARock = false;
             }
         }
     }
 
-    
+
     private void SetMonolito()
     {
         if (!monolitoActivo)
@@ -227,7 +234,7 @@ public class PickUpObjects : MonoBehaviour
             if (objectToPickUp.CompareTag("Monolito"))
             {
                 canvasMonolito.SetActive(true);
-                
+
                 selectButtonPressed = false;
             }
         }
@@ -268,7 +275,7 @@ public class PickUpObjects : MonoBehaviour
                 selectButtonPressed = false;
             }
         }
-        
+
     }
 
     private void LockScripts()

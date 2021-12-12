@@ -8,6 +8,7 @@ public class LogicMenuInGame : MonoBehaviour
     void Awake()
     {
         var keepBetweenScenes = FindObjectsOfType<LogicMenuInGame>();
+
         if(keepBetweenScenes.Length > 1)
         {
             Destroy(keepBetweenScenes[1]);

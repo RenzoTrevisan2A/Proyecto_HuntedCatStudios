@@ -37,13 +37,14 @@ public class OptionsMenu_Resolution : MonoBehaviour
         resolutionDropDown.value = actualResolution;
         resolutionDropDown.RefreshShownValue();
 
-        resolutionDropDown.value = PlayerPrefs.GetInt("resolutionNumber", 0);
+        //resolutionDropDown.value = PlayerPrefs.GetInt("resolutionNumber", 0);
     }
 
     public void ChangeResolutions(int resolutionIndex)
     {
-        PlayerPrefs.SetInt("resolutionNumber", resolutionDropDown.value);
+        //PlayerPrefs.SetInt("resolutionNumber", resolutionDropDown.value);
 
+        Debug.Log(resolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }

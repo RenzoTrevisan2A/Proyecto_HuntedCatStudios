@@ -10,6 +10,7 @@ public class WaterBallMove : MonoBehaviour
 
     private float startTime;
 
+    WaterBall waterBall;
     private void Awake()
     {
         startTime = Time.time;

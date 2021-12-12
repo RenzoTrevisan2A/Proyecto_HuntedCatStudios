@@ -9,6 +9,7 @@ public class Flames_FP : MonoBehaviour
     public VisualEffect flames;
     public Elementos2 elementos2;
     public Collider flamesCO;
+    public bool flamesAudioPlayed = false;
 
     [Range(0, 1)]
     public float flamesTimeOn = 0.5f;
@@ -53,10 +54,14 @@ public class Flames_FP : MonoBehaviour
 
         if (powerActionPressed)
         {
-            while (Time.time < startTime + flamesTimeOn)
+            while (Time.time < startTime + flamesTimeOn && !flamesAudioPlayed)
             {
                 flamesCO.enabled = true;
                 flames.Play();
+
+                AudioManager.PlayerSound("flames");
+                flamesAudioPlayed = true;
+                
                 yield return null;
             }
 
@@ -69,6 +74,7 @@ public class Flames_FP : MonoBehaviour
             }
             flamesCO.enabled = false;
             flames.Stop();
+            flamesAudioPlayed = false;
             powerActionPressed = false;
         }
     }

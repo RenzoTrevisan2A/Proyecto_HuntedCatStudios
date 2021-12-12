@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
 
             if (cronometro >= 4)
             {
-                rutina = Random.Range(0, 2);
+                rutina = Random.Range(0, 1);
                 cronometro = 0;
             }
 

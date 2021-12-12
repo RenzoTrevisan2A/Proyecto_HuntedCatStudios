@@ -35,6 +35,8 @@ public class WaterBall : MonoBehaviour
 
     private void SpawnWaterBall()
     {
-        Instantiate(effectToSpawn, firePoint.transform.position, Quaternion.identity);
+        GameObject ball = Instantiate(effectToSpawn, firePoint.transform.position, Quaternion.identity);
+        ball.transform.localRotation = gameObject.transform.localRotation;
+        AudioManager.PlayerSound("waterball");
     }
 }
