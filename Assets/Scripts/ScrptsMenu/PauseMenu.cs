@@ -16,16 +16,19 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.escapeKey.isPressed)
-        {
-            pauseMenuCanvas.gameObject.SetActive(true);
-            Time.timeScale = 0;
-        }
-
-        if (pauseMenuCanvas.isActiveAndEnabled || optionsPanel.canvasOptions.activeSelf == true)
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+        if (pauseMenuCanvas)
+        { 
+            if (Keyboard.current.escapeKey.isPressed)
+            {
+                pauseMenuCanvas.gameObject.SetActive(true);
+                Time.timeScale = 0;
+            }
+       
+            if (pauseMenuCanvas.isActiveAndEnabled || optionsPanel.canvasOptions.activeSelf == true)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
     }
 

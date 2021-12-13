@@ -7,22 +7,20 @@ using System;
 
 public class OptionsMenu_Quality : MonoBehaviour
 {
-    public TMP_Dropdown dropdown;
-    public int quality;
+    //public TMP_Dropdown dropdown;
+    //public int quality;
 
-    public
-    // Start is called before the first frame update
-    void Start()
-    {
-        quality = PlayerPrefs.GetInt("qualityNumber", 1);
-        dropdown.value = quality;
-        AdjustQuality();
-    }
+    //public
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    dropdown.value = quality;
+    //    AdjustQuality();
+    //}
 
-    public void AdjustQuality()
-    {
-        QualitySettings.SetQualityLevel(dropdown.value);
-        PlayerPrefs.SetInt("qualityNumber", dropdown.value);
-        quality = dropdown.value;
-    }
+    //public void AdjustQuality()
+    //{
+    //    QualitySettings.SetQualityLevel(dropdown.value);
+    //    quality = dropdown.value;
+    //}
 }

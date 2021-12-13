@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1478.5754, g: 1831.5508, b: 2424.9724, a: 1}
+  m_IndirectSpecularColor: {r: 1481.9727, g: 1836.0449, b: 2430.713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1595232502}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OptionsMenu_Resolution, Assembly-CSharp
         m_MethodName: ChangeResolutions
         m_Mode: 3
@@ -3825,7 +3825,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1595232501}
   - component: {fileID: 1595232500}
-  - component: {fileID: 1595232502}
   m_Layer: 0
   m_Name: OptionsController
   m_TagString: Untagged
@@ -3861,19 +3860,6 @@ Transform:
   m_Father: {fileID: 2026574123}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1595232502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1595232499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0a3802dc95b4f44d8c9d95a5bfb3065, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resolutionDropDown: {fileID: 502133748}
 --- !u!1 &1688375172
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,24 +1,9 @@
 fileFormatVersion: 2
-guid: 5e07cc750c86ddc45bde011dee99cd16
+guid: 5fa4f44f4def60c4cbfbc49cf50127fd
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: f4f2232a45fd3b143ac97aa0fb53e60f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert3
-    second: {fileID: 2100000, guid: 6131da890587e7a4aa8422fae89f8416, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: uvs_hojas (2)
-    second: {fileID: 2800000, guid: b203c001f9ae7a74eb07bb4bf775ee5c, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -56,7 +41,7 @@ ModelImporter:
     sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
+    importCameras: 1
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
