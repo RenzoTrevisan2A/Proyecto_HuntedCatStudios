@@ -7,8 +7,10 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] float jumpSpeed;
-    [SerializeField] float jumpHeight = 1.0f;
+    //Jump
+    [SerializeField] float jumpVelocity;
+    [SerializeField] float jumpForce = 10.0f;
+
     [SerializeField] float movementSpeed;
     [SerializeField] float SpeedGrabbingSomethin = 3f;
     [SerializeField] float dashSpeed;
@@ -25,7 +27,7 @@ public class Character : MonoBehaviour
 
     //Variables de movimiento
     public float actualSpeed = 0f;
-    private float gravityValue = -9.81f;
+    private float gravityValue = 14.0f;
 
     //Boleanas de movimiento
     bool jump = false;
@@ -35,7 +37,6 @@ public class Character : MonoBehaviour
 
     //Vectores
     private Vector2 moveVector;
-    public Vector3 playerVelocity;
 
     Collider col;
 
@@ -73,10 +74,10 @@ public class Character : MonoBehaviour
         groundedPlayer = controller.isGrounded;
         characterAnimatorController.SetBool("isGrounded", groundedPlayer);
 
-        if(groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
+        //if(groundedPlayer && playerVelocity.y < 0)
+        //{
+        //    playerVelocity.y = 0f;
+        //}
 
         //Asignamos la main camera al nombre de "Camera".
         Transform camera = Camera.main.transform;
@@ -93,7 +94,7 @@ public class Character : MonoBehaviour
 
         //Aplicamos movimiento con el CharacterController.
         controller.Move(movementDirectionOnPlane * actualSpeed * Time.deltaTime);
-        movementDirection.x += gravityValue * Time.deltaTime;
+        movementDirection.x -= gravityValue * Time.deltaTime;
         characterAnimatorController.SetFloat("characterSpeed", actualSpeed);
 
         //Aplicamos rotacion al personaje.
@@ -105,28 +106,47 @@ public class Character : MonoBehaviour
         Quaternion rotationApply = Quaternion.AngleAxis(angle * Time.deltaTime * speedRotation, Vector3.up);
         transform.rotation = rotationApply * transform.rotation;
 
-        //Setea la velocidad a 0 si no nos estamos moviendo.
+        //Logica salto
         if (groundMovement == new Vector3(0, 0, 0))
         {
-            actualSpeed = 0f;
+            actualSpeed = 0f;                 
         }
-        
+
+        if (groundedPlayer)
+        {
+            jumpVelocity = -gravityValue * Time.deltaTime;
+            if (jump)
+            {
+                jumpVelocity = jumpForce;
+                jump = false;
+            }
+        }
+        else
+        {
+            jumpVelocity -= gravityValue * Time.deltaTime;
+        }
+
+        Vector3 jumpVector = new Vector3(0, jumpVelocity, 0);
+        controller.Move(jumpVector * Time.deltaTime);
 
         //mecanica dede Salto.
-        if (jump && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            characterAnimatorController.SetTrigger("Jumping");
-        }
-        else if (jump && !groundedPlayer)
-        {
-            jump = false;
-        }
+        //if (jump && groundedPlayer)
+        //{
+        //    playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        //    characterAnimatorController.SetTrigger("Jumping");
+        //}
+        //else if (jump && !groundedPlayer)
+        //{
+        //    jump = false;
+        //}
 
         //le aplicamos gravedad al salto.
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
-        characterAnimatorController.SetFloat("characterSpeedY", playerVelocity.y);
+        //playerVelocity.y += gravityValue * Time.deltaTime;
+        //controller.Move(playerVelocity * Time.deltaTime);
+        //characterAnimatorController.SetFloat("characterSpeedY", playerVelocity.y);
+
+
+
 
         //Cuando se activa el dash llamamos a la funcion DashCoroutine la cual contiene la logica de este.
         if (dash)
