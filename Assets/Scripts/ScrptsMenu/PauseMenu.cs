@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (pauseMenuCanvas)
+        if (pauseMenuCanvas && optionsPanel)
         { 
             if (Keyboard.current.escapeKey.isPressed)
             {
