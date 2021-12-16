@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class FollowToLookAt : MonoBehaviour
 {
-    [SerializeField] float speed = 10.0f;
+    [SerializeField] float maxSpeed = 10.0f;
+    [SerializeField] float speedBase = 4f;
+    float actualSpeed = 0f;
     public Transform target;
-
-    public float retard;
-    private float originalRetard;
 
     [SerializeField] float minDistance = 0.1f;
     [SerializeField] float maxDistance = 3f;
-    [SerializeField] float speedUp;
+    //[SerializeField] float speedUp;
 
-    Character character;
+    [SerializeField] float acceleration;
     private void Start()
     {
-        originalRetard = retard;
+        actualSpeed = speedBase;
     }
 
     void FixedUpdate()
@@ -25,37 +24,36 @@ public class FollowToLookAt : MonoBehaviour
         transform.LookAt(target.position);
 
         Vector3 direction = target.position - transform.position;
+
         Debug.DrawRay(transform.position, direction, Color.red);
+
         float distance = direction.magnitude;
 
         if (distance > maxDistance)
         {
             Debug.DrawRay(transform.position, direction.normalized * (distance - maxDistance), Color.green);
-            transform.Translate(direction.normalized * (distance - maxDistance));
+            transform.Translate(direction.normalized * (distance - maxDistance), Space.World);
         }
 
         if (distance > minDistance)
         {
             PerformFollowing();
-            speedUp += 0.1f * Time.deltaTime;
         }
-        else
+        else if(distance < minDistance)
         {
-            //retard = originalRetard;
-            speedUp -= 0.1f * Time.deltaTime;
-            if (speedUp < 0f) { speedUp = 0f; }
+            actualSpeed = speedBase;
         }
     }
 
     private void PerformFollowing()
     {
-        //retard -= Time.deltaTime;
+        Vector3 direction = target.position - transform.position;
 
-        //if (retard <= 0.0f) 
-        //{
-            //transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
-            Vector3 direction = target.position - transform.position;
-            transform.Translate(direction.normalized * (speed + speedUp) * Time.deltaTime);
-        //}
+        if (actualSpeed < maxSpeed)
+        {
+            actualSpeed += acceleration * Time.deltaTime;
+        }
+
+        transform.Translate(actualSpeed * Time.deltaTime * direction.normalized, Space.World);
     }
 }
