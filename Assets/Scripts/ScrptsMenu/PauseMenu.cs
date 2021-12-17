@@ -21,13 +21,7 @@ public class PauseMenu : MonoBehaviour
             if (Keyboard.current.escapeKey.isPressed)
             {
                 pauseMenuCanvas.gameObject.SetActive(true);
-                Time.timeScale = 0;
-            }
-       
-            if (pauseMenuCanvas.isActiveAndEnabled || optionsPanel.canvasOptions.activeSelf == true)
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0f;
             }
         }
     }
@@ -49,6 +43,6 @@ public class PauseMenu : MonoBehaviour
         AudioManager.PlayerSound("click");
         optionsPanel.canvasOptions.SetActive(false);
         pauseMenuCanvas.gameObject.SetActive(false);
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
     }
 }

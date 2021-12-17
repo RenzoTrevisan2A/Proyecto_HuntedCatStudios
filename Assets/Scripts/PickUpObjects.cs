@@ -25,7 +25,7 @@ public class PickUpObjects : MonoBehaviour
     bool powerActionPressed = false;
     bool selectButtonPressed = false;
     public bool isPickable = false;
-    public bool monolitoActivo = false;
+    public bool monolitoActivo;
 
     Elementos2 elementos2;
     public GameObject canvasMonolito;
@@ -40,7 +40,7 @@ public class PickUpObjects : MonoBehaviour
     private void Start()
     {
         ballforce += gravityValue * Time.deltaTime;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public Texture2D cursorPointer;
@@ -54,16 +54,10 @@ public class PickUpObjects : MonoBehaviour
     {
         monolitoActivo = canvasMonolito.activeSelf;
 
-        if (!monolitoActivo)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else if (monolitoActivo)
-        {
-            Cursor.SetCursor(cursorPointer, Vector2.zero, CursorMode.Auto);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
+        //if (!monolitoActivo)
+        //{
+        //    Cursor.lockState = CursorLockMode.Locked;
+        //}
 
         if (objectToPickUp == null)
         {
@@ -229,19 +223,21 @@ public class PickUpObjects : MonoBehaviour
 
     private void SetMonolito()
     {
+
         if (!monolitoActivo)
         {
             if (objectToPickUp.CompareTag("Monolito"))
             {
                 canvasMonolito.SetActive(true);
-
                 selectButtonPressed = false;
+                //Time.timeScale = 0f;
             }
         }
         else
         {
             canvasMonolito.SetActive(false);
             selectButtonPressed = false;
+            //Time.timeScale = 1f;
         }
     }
 
@@ -284,11 +280,13 @@ public class PickUpObjects : MonoBehaviour
         {
             gameObject.GetComponent<Character>().enabled = false;
             gameObject.GetComponent<Flames_FP>().enabled = false;
+            gameObject.GetComponentInChildren<WaterBall>().enabled = false;
         }
         else
         {
             gameObject.GetComponent<Flames_FP>().enabled = true;
             gameObject.GetComponent<Character>().enabled = true;
+            gameObject.GetComponentInChildren<WaterBall>().enabled = true;
         }
     }
 
