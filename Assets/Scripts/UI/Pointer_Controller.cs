@@ -14,7 +14,7 @@ public class Pointer_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.SetCursor(cursorPointer, Vector2.zero, CursorMode.Auto);
+        //Cursor.SetCursor(cursorPointer, Vector2.zero, CursorMode.Auto);
         optionsPanel = GameObject.FindGameObjectWithTag("Options").GetComponent<OptionsController>();
     }
 

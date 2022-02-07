@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class LogicMenuInGame : MonoBehaviour
 {
+    static LogicMenuInGame instance;
+
     // Start is called before the first frame update
     void Awake()
     {
-        var keepBetweenScenes = FindObjectsOfType<LogicMenuInGame>();
-
-        if(keepBetweenScenes.Length > 1)
+        if (instance != null)
         {
-            Destroy(keepBetweenScenes[1]);
-            return;
+            Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 }
